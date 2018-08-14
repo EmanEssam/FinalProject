@@ -36,4 +36,5 @@ dependencies {
     implementation('com.google.http-client:google-http-client-android:1.23.0') {
         exclude module: 'guava-jdk5'
     }
+    implementation project(path: ':JavaJokes')
 }

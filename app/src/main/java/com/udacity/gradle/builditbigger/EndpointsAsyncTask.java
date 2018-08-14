@@ -1,4 +1,5 @@
 package com.udacity.gradle.builditbigger;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -21,7 +22,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
-        if(myApiService == null) {  // Only do this once
+        if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
@@ -43,7 +44,9 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         String name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+//            return myApiService.sayHi(name).execute().getData();
+
+            return myApiService.tellJoke().execute().getJoke();
         } catch (IOException e) {
             return e.getMessage();
         }
