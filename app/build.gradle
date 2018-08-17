@@ -13,7 +13,6 @@ buildscript {
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.1"
-
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 17
@@ -24,17 +23,67 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+//        paid {
+//        }
+//        free {
+//        }
     }
+    flavorDimensions 'paid'
+    productFlavors {
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
+            buildConfigField "boolean", "PAID_VERSION", "false"
+
+//            versionCode 1
+//            versionName '1.0'
+        }
+        paid {
+            dimension 'paid'
+            applicationId 'com.udacity.gradle.builditbigger.paid'
+//            versionCode 1
+//            versionName '1.0'
+            applicationIdSuffix ".paid"
+            versionNameSuffix "-paid"
+            buildConfigField "boolean", "PAID_VERSION", "true"
+        }
+    }
+
+//    productFlavors {
+//        free {
+//            applicationId "com.udacity.gradle.builditbigger.free"
+//        }
+//        paid {
+//            applicationId "com.udacity.gradle.builditbigger.paid"
+//        }
+//    }
+
 }
 
+//productFlavors {
+//    free {
+//        applicationId "com.udacity.gradle.builditbigger.free"
+//        versionName "1.0-free"
+//        // this boolean can be accessed in java classes by using BuildConfig class
+//        // and now you can identify if your app is the paid version or not
+//        buildConfigField "boolean", "PAID_VERSION", "false"
+//    }
+//
+//    paid {
+//        applicationId "com.udacity.gradle.builditbigger.paid"
+//        versionName "1.0-paid"
+//        buildConfigField "boolean", "PAID_VERSION", "true"
+//    }
+//}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
     implementation('com.google.android.gms:play-services-ads:15.0.1') {
@@ -50,10 +99,8 @@ dependencies {
     implementation project(path: ':JavaJokes')
     implementation project(path: ':displayjoke')
     implementation project(path: ':backend')
-
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     testImplementation 'junit:junit:4.12'
 }
