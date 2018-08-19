@@ -22,6 +22,7 @@ public class EndpointsAsyncTaskTest {
 
         EndpointsAsyncTask task = new EndpointsAsyncTask();
 //
+
         task.execute(new Pair<Context, String>(activityActivityTestRule.getActivity(), "Manfred"));
         String result = task.get();
 

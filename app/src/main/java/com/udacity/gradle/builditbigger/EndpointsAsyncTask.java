@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Pair;
-import android.widget.Toast;
 
 import com.example.displayjoke.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
-
-import com.example.javajokes.Joker;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
@@ -49,7 +46,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
             return myApiService.tellJoke().execute().getJoke();
         } catch (IOException e) {
-            return e.getMessage();
+            return "";
         }
     }
 
@@ -57,7 +54,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     protected void onPostExecute(String result) {
 //        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(context, DisplayJokeActivity.class);
-        intent.putExtra("joke",result);
+        intent.putExtra("joke", result);
         context.startActivity(intent);
     }
 }
